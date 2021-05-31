@@ -1,0 +1,40 @@
+tree("Root")
+	parallel
+	//linha para ativar e repetir o patrol
+		repeat mute tree ("Patrol")
+		//linha para ativar e repetir a morte
+		repeat mute tree ("Dead")
+
+tree ("Patrol")
+	fallback
+		tree("Attack")
+		//chama o comando caso a vida chegar a 40 ele caminha 
+		while IsHealthLessThan(40.0)
+				fallback
+					// chama o bt wander
+					tree("Wander")
+
+tree("Attack")
+	
+	while SeePlayer
+		sequence
+			//chama comando para seguir o player
+			TargetPlayer
+			//travar no player
+			LookAtTarget
+			//atirar no player
+			Fire
+
+tree("Dead")
+	sequence
+		//chama o comando caso a vida esteja menor q 0 ele chama o comando para explodir
+		IsHealthLessThan(0.1)
+		//comando para explodir
+		Explode
+
+tree("Wander")
+	sequence
+		//comando para definir destino randomico
+		PickRandomDestination
+		//vai ate o destino randomico
+		MoveToDestination

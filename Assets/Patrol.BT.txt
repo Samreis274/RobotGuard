@@ -1,6 +1,9 @@
 tree("Root")
+//faz  um patrulha 
 	sequence
+		// pega um destino 
 		PickDestination(-100,-100)
+		//vai ate o destino
 		MoveToDestination
 		PickDestination(-100, 100)
 		MoveToDestination
